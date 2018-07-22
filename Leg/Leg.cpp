@@ -4,14 +4,14 @@
 #define L1 9
 #define L2 16
 
-void Leg::attach(int pov, int col, int nog, bool isLeft){
+void Leg::attach(int pov, int col, int nog, bool isLeft){						//Функция инициализации ноги
     s0.attach(pov);
     s2.attach(col);
     s3.attach(nog);
     _isLeft = isLeft;
 }
 
-void Leg::attach(int pov, int col, int nog, bool isLeft, bool Forward, bool krai){
+void Leg::attach(int pov, int col, int nog, bool isLeft, bool Forward, bool krai){			//инициализация ноги с указанием стороны и положения
     s0.attach(pov);
     s2.attach(col);
     s3.attach(nog);
@@ -20,103 +20,13 @@ void Leg::attach(int pov, int col, int nog, bool isLeft, bool Forward, bool krai
 	_krai = krai;
 }
 
-/*void Leg::move(float xm, float ym, float zm){
-*    float h, s, m, s1, u, b, v, p, a;
-*    if (z >= zm) {
-*    h = abs(z - zm);
-*    s = sqrt(abs(ym - y)*abs(ym - y)+abs(xm - x)*abs(xm - x));
-*    m = h * h + s * s;
-*    s1 = sqrt(m);
-*    u = (L1 * L1 + L2 * L2 - s1 * s1) / 2 / L1 / L2;
-*    b = acos(u) * 180 / PI;
-*    u = (s1 * s1 + L1 * L1 - L2 * L2) / 2 / s1 / L1;
-*    v = acos(u) * 180 / PI;
-*    u = h / s1;
-*    p = acos(u) * 180 / PI;
-*    a = 180 - v - p;
-*    if ((0 <= a) && (a <= 180) && (0 <= b) && (b <= 180)) {
-*      if (_isLeft == true) {
-*        s2.write(180 - a);
-*        s3.write(180 - b);
-*      }
-*      else {
-*        s2.write(a);
-*        s3.write(b);
-*      }
-*    }
-*  }
-*  else {
-*    h = abs(z - zm);
-*    s = sqrt(abs(ym - y)*abs(ym - y)+abs(xm - x)*abs(xm - x));
-*    m = h * h + s * s;
-*    s1 = sqrt(m);
-*    u = (L1 * L1 + L2 * L2 - s1 * s1) / 2 / L1 / L2;
-*    b = acos(u) * 180 / PI;
-*    u = (s1 * s1 + L1 * L1 - L2 * L2) / 2 / s1 / L1;
-*    v = acos(u) * 180 / PI;
-*    u = h / s1;
-*    p = asin(u) * 180 / PI;
-*    a = 90 - v - p;
-*    if ((0 <= a) && (a <= 180) && (0 <= b) && (b <= 180)) {
-*      if (_isLeft == true) {
-*        s2.write(180 - a);
-*        s3.write(180 - b);
-*      }
-*      else {
-*        s2.write(a);
-*        s3.write(b);
-*      }
-*    }
-*  }
-*  if(_isLeft == true){
-*     if(xm >= x){
-*  	    h = abs(x - xm);
-*     	s = abs(y - ym);
-*     	m = h * h + s * s;
-*        s1 = sqrt(m);
-*        m = s / s1;
-*        a = asin(m) * 180 / PI;
-*        s0.write(180 - a);
-*     }
-*     else{
-*     	h = abs(x - xm);
-*     	s = abs(y - ym);
-*      	m = h * h + s * s;
-*        s1 = sqrt(m);
-*        m = s / s1;
-*        a = asin(m) * 180 / PI;
-*        s0.write(a);
-*     }
-*   }
-*   else{
-*   	if(xm >= x){
-*  	    h = abs(x - xm);
-*     	s = abs(y - ym);
-*     	m = h * h + s * s;
-*        s1 = sqrt(m);
-*        m = s / s1;
-*        a = asin(m) * 180 / PI;
-*        s0.write(a);
-*     }
-*     else{
-*     	h = abs(x - xm);
-*     	s = abs(y - ym);
-*      	m = h * h + s * s;
-*        s1 = sqrt(m);
-*        m = s / s1;
-*        a = asin(m) * 180 / PI;
-*        s0.write(180 - a);
-*     }
-*   }
-}*/
-
-void Leg::set(float x2, float y2, float z2){
+void Leg::set(float x2, float y2, float z2){								//Установка начальных координат
 	x = x2;
 	y = y2;
 	z = z2 + 4;
 }
 
-void Leg::move(float xm, float ym, float zm){
+void Leg::move(float xm, float ym, float zm){								//Передвижение ноги
 	if (_krai == true) {
 		float h, s, m, s1, u, b, v, p, a;
 		if (z >= zm) {
@@ -310,7 +220,7 @@ void Leg::move(float xm, float ym, float zm){
 	}
 }
 
-void Body::init() {
+void Body::init() {										//Иницивлмзация корпуса, не использовать
 	l1.attach(17, 20, 21, false, true, true);
 	l2.attach(3, 2, 19, false);
 	l3.attach(9, 8, 7, false, false, true);
@@ -348,7 +258,7 @@ void Body::init() {
 	delay(5000);
 }
 
-void Body::risk(float distance) {
+void Body::risk(float distance) {								//Изменение угла рысканья
 	l1.set(l1.x += distance, l1.y, l1.z - 4);
 	l2.set(l2.x += distance, l2.y, l2.z - 4);
 	l3.set(l3.x += distance, l3.y, l3.z - 4);
